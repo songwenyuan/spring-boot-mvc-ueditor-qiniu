@@ -4,28 +4,28 @@ spring boot 、springMVC环境集成百度ueditor、七牛云存储
 
 原料：
 
-1、ueditor源码,版本1.4.3.3
-2、ueditor上传文件路径配置官方文档(http://fex.baidu.com/ueditor/#server-path)
-3、七牛sdk(版本：7.0.7)及文档
+1、ueditor源码,版本1.4.3.3</br>
+2、ueditor上传文件路径配置官方文档(http://fex.baidu.com/ueditor/#server-path)</br>
+3、七牛sdk(版本：7.0.7)及文档</br>
 特点：
 
-    基于spring boot、spirngMVC环境，集成百度UEditor和七牛存储
+    - 基于spring boot、spirngMVC环境，集成百度UEditor和七牛存储
 
-    重写了存储图片的代码逻辑
+    - 重写了存储图片的代码逻辑
 
-    集成七牛sdk
+    - 集成七牛sdk
 
-    修改了多图上传弹框的图片列表相关js的代码
+    - 修改了多图上传弹框的图片列表相关js的代码
 
-    将UEditor的config.json配置化
+    - 将UEditor的config.json配置化
 
-    内置springMVC上传接口
+    - 内置springMVC上传接口
 
 在spring boot环境中，只需引入jar，配置文件中添加config.json配置及七牛相关配置即可使用。
 修改记录：
 
 1、上传接口：
-
+```
 @Controller
 @RequestMapping("/ueditor")
 public class UeditorController {
@@ -37,9 +37,9 @@ public class UeditorController {
         return actionEnter.exec(request);
     }
 }
-
+```
 2、基于spring boot配置：
-
+```
 @ConfigurationProperties(prefix = "ueditor")
 public class UeditorProperties {
 
@@ -57,9 +57,9 @@ public class UeditorProperties {
 
     //......
 }
-
+```
 3、重写StorageManager类，只使用七牛上传图片，去除了旧代码存储到本地的功能。
-
+```
 public static String accessKey;
 public static String secretKey;
 public static String baseUrl;
@@ -85,10 +85,10 @@ public static State saveBinaryFile(byte[] data, String path) {
         }
         return state;
     }
-
+```
 4、重写多个类ImageHunter、ActionEnter、FileManager等
 5、修改ueditor/dialogs/image/image.js的857行getImageData()方法,此方法是向后台拉取图片列表数据；为了能分页，需要迎合七牛的sdk规范，此处添加了参数：marker ；相对应，后台的FileManager类listFile方法也做了修改。
-
+```
  /* 初始化第一次的数据 */
  initData: function () {
      /* 拉取数据需要使用的值 */
@@ -149,19 +149,19 @@ public static State saveBinaryFile(byte[] data, String path) {
                 });
             }
         },
-
+```
 使用：
 
 1、引入jar (源码在github，请自行编译后再引入)：
-
+```
 <dependency>
     <groupId>com.baidu</groupId>
     <artifactId>spring-boot-ueditor-mvc</artifactId>
     <version>1.4.3.3-SNAPSHOT</version>
 </dependency>
-
+```
 2、spring boot启动类添加扫描: @ComponentScan(basePackages = {“com.baidu”})：
-
+```
 @Controller
 @ComponentScan(basePackages = {"com.zrk","com.baidu"})
 @SpringBootApplication
@@ -177,9 +177,9 @@ public class SpringBootMvcUeditorQiniuDemoApplication {
     }
 
 }
-
+```
 3、application.properties中添加ueditor的config.json配置，和七牛相关配置：
-
+```
 #开启thymeleaf
 spring.thymeleaf.enabled=true
 #上传文件大小
@@ -197,3 +197,4 @@ ueditor.bucket=zrk-test
 ueditor.base-url=http://od710rrnd.bkt.clouddn.com
 #文件上传到七牛的目录，默认为‘ueditor/file/’，请使用‘/’结尾
 ueditor.upload-dir-prefix=biz/img/
+```
