@@ -1,5 +1,5 @@
 # spring-boot-mvc-ueditor-qiniu
-spring boot 、springMVC环境集成百度ueditor、七牛云存储
+spring boot 、springMVC环境集成百度ueditor富文本编辑器，使用七牛云存储图片
 
 **源码：https://github.com/zrk1000/spring-boot-mvc-ueditor-qiniu**</br>
 **demo：https://github.com/zrk1000/spring-boot-mvc-ueditor-qiniu-demo**</br>
