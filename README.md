@@ -1,13 +1,16 @@
 # spring-boot-mvc-ueditor-qiniu
 spring boot 、springMVC环境集成百度ueditor、七牛云存储
 
+**源码：https://github.com/zrk1000/spring-boot-mvc-ueditor-qiniu**
+**demo：https://github.com/zrk1000/spring-boot-mvc-ueditor-qiniu-demo**
+**博客：http://blog.csdn.net/zrk1000/article/details/53283964**
 
-原料：
+##原料：
 
-1、ueditor源码,版本1.4.3.3</br>
+1、ueditor源码 https://github.com/fex-team/ueditor ,版本1.4.3.3</br>
 2、ueditor上传文件路径配置官方文档(http://fex.baidu.com/ueditor/#server-path)</br>
-3、七牛sdk(版本：7.0.7)及文档</br>
-特点：
+3、七牛sdk(版本：7.0.7)及文档 http://developer.qiniu.com/code/v7/sdk/java.html</br>
+##特点：
 
     - 基于spring boot、spirngMVC环境，集成百度UEditor和七牛存储
 
@@ -21,8 +24,8 @@ spring boot 、springMVC环境集成百度ueditor、七牛云存储
 
     - 内置springMVC上传接口
 
-在spring boot环境中，只需引入jar，配置文件中添加config.json配置及七牛相关配置即可使用。
-修改记录：
+在spring boot环境中，只需引入jar，配置文件中添加config.json配置及七牛相关配置即可使用。</br>
+##修改记录：
 
 1、上传接口：
 ```
@@ -150,7 +153,8 @@ public static State saveBinaryFile(byte[] data, String path) {
             }
         },
 ```
-使用：
+
+##使用：
 
 1、引入jar (源码在github，请自行编译后再引入)：
 ```
